@@ -22,7 +22,7 @@ router.get('/:id', (req, res) => {
     where: {id: req.params.id}
   }).then(data => {
     if (!data) {
-      res.status(404).json({ message: 'There are no posts with this id' });
+      res.status(404).json({ message: 'There is no category with this id' });
       return;
     }
     res.json(data)

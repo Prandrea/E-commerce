@@ -20,7 +20,7 @@ router.get('/:id', (req, res) => {
     where: {id: req.params.id}
   }).then(data => {
     if (!data) {
-      res.status(404).json({ message: 'There are no posts with this id' });
+      res.status(404).json({ message: 'There are no tags with this id' });
       return;
     }
     res.json(data)
@@ -53,7 +53,21 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  // delete on tag by its `id` value
+  Tag.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(data => {
+    if (!data) {
+      res.status(404).json({ message: 'There are no tags with this id' });
+      return;
+    }
+    res.json(data);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
 module.exports = router;
